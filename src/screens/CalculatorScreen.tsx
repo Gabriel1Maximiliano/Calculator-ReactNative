@@ -10,7 +10,7 @@ export const CalculatorScreen = () => {
     });
   return (
     <View>
-        <Text style={ styles.text } >Calculator Screen</Text>
+        <Text style={ styles.text } >Calculator Screen implemented</Text>
     </View>
   );
 };
