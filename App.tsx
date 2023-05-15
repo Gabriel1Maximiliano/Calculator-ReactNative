@@ -1,11 +1,21 @@
-import React from 'react'
-import { View,Text } from 'react-native'
+/* eslint-disable prettier/prettier */
+import React from 'react';
+
+import { View,StyleSheet } from 'react-native';
+import { CalculatorScreen } from './src/screens/CalculatorScreen';
 
 export const App = () => {
-  return (
-    <View>
-      <Text style={ {fontSize:45} } >ettxtt</Text>
 
+
+
+  const styles = StyleSheet.create({
+    text: {
+      display: 'flex',
+    },
+  });
+  return (
+    <View style={ styles.text } >
+      <CalculatorScreen />
     </View>
-  )
-}
+  );
+};
