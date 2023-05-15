@@ -1,13 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text,StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import { styles } from '../theme/appTheme';
 
 export const CalculatorScreen = () => {
-    const styles = StyleSheet.create({
-        text:{
-            fontSize:45,
-        },
-    });
+    
   return (
     <View>
         <Text style={ styles.text } >Calculator Screen implemented</Text>

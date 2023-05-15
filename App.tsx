@@ -1,21 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 
-import { View,StyleSheet } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { CalculatorScreen } from './src/screens/CalculatorScreen';
+import { styles } from './src/theme/appTheme';
 
 export const App = () => {
 
-
-
-  const styles = StyleSheet.create({
-    text: {
-      display: 'flex',
-    },
-  });
   return (
-    <View style={ styles.text } >
+    <SafeAreaView style={ styles.backGround } >
+      <StatusBar backgroundColor="black"
+      barStyle="light-content"
+      />
       <CalculatorScreen />
-    </View>
+    </SafeAreaView>
   );
 };
