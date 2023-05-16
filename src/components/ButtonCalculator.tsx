@@ -7,15 +7,18 @@ interface Props {
   text: string;
   color?: string;
   buttonWith?: boolean;
+  action?: ((stringNumber: string) => void) | undefined;
 }
 
 export const ButtonCalculator = ({
   text,
   color = '#2D2D2D',
   buttonWith = false,
+  action,
 }: Props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+    onPress={  action ? ()=>action( text = '1' ) : undefined }>
         <View
         style={{
             ...styles.button,
