@@ -16,7 +16,32 @@ export const CalculatorScreen = () => {
    };
 
    const makeNumber = ( stringNumber:string ) =>{
+    // Verify decimal ponit 
+    if ( number.includes('.') && stringNumber === '.' ) {
+        return;
+    }
     setNumber( number + stringNumber );
+
+    if ( number.startsWith('0') || number.startsWith('-0') ){
+        // decimal point
+         if ( stringNumber === '.'  ){
+            setNumber( number + stringNumber );
+        } else if ( stringNumber === '0' && number.includes('.') ){
+            // Check if there is other zero and point
+
+            setNumber( number + stringNumber );
+       
+         } else if ( number.includes('0') && !number.includes('.') ){
+            // if equal to zero, and there is a point
+            setNumber( stringNumber ); 
+            
+         } else if ( stringNumber !== '0' && stringNumber.includes('.') ) {
+            // Avoid 0.000
+            setNumber( number );
+         } else {
+            setNumber( number +  stringNumber );
+         }
+    }
    };
 
    const positiveNegative = ()=>{
@@ -65,8 +90,8 @@ export const CalculatorScreen = () => {
         </View>
 
         <View style={ styles.row } >
-            <ButtonCalculator text='0' buttonWith action={ ()=>makeNumber('1')}/>
-            <ButtonCalculator text='.' action={ ()=>makeNumber('1')}/>
+            <ButtonCalculator text='0' buttonWith action={ ()=>makeNumber('0')}/>
+            <ButtonCalculator text='.' action={ ()=>makeNumber('.')}/>
             <ButtonCalculator text='=' color='#ff8c00'/>
         </View>
        
