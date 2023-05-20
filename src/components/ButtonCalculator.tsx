@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */ /* eslint-disable no-trailing-spaces */ /* eslint-disable prettier/prettier */
 import React from 'react';
+//import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from '../theme/appTheme';
 
@@ -16,9 +17,26 @@ export const ButtonCalculator = ({
   buttonWith = false,
   action,
 }: Props) => {
+
+// const [ timesPressed, setTimesPressed ] = useState<number>(0);
+
+// const isPressed = () =>{
+
+//   setTimesPressed( prev => prev + 1 );
+
+//  if ( timesPressed === 1 ){
+
+//    action;
+//  } else {
+//   return;
+//  }
+
+// };
+
   return (
     <TouchableOpacity
-    onPress={  action ? ()=>action( text = '1' ) : undefined }>
+   
+    onPress={  action ? ()=>action( text = '' ) : undefined }>
         <View
         style={{
             ...styles.button,

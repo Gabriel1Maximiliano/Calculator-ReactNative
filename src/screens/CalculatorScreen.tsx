@@ -1,107 +1,27 @@
 /* eslint-disable jsx-quotes */ /* eslint-disable no-trailing-spaces */ /* eslint-disable prettier/prettier */
 
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from '../theme/appTheme';
 import { ButtonCalculator } from '../components/ButtonCalculator';
+import { useCalculator } from '../hooks/useCalculator';
 
-enum MathematicalOperations {
-    add, subtract, multiply, divide
-}
+
 export const CalculatorScreen = () => {
-    
-   const [ number, setNumber ] = useState('100');
-   const [ prevNumber, setPrevNumber ] = useState('0');
-   const mathematicalOperationsRef = useRef<MathematicalOperations>();
-
-   const clearScreen = () =>{
-    setNumber('0');
-    setPrevNumber( '0' );
-   };
-
-   const makeNumber = ( stringNumber:string ) =>{
-    // Verify decimal ponit 
-    if ( number.includes('.') && stringNumber === '.' ) {
-        return;
-    }
-    setNumber( number + stringNumber );
-
-    if ( number.startsWith('0') || number.startsWith('-0') ){
-        // decimal point
-         if ( stringNumber === '.'  ){
-            setNumber( number + stringNumber );
-        } else if ( stringNumber === '0' && number.includes('.') ){
-            // Check if there is other zero and point
-
-            setNumber( number + stringNumber );
-       
-         } else if ( number.includes('0') && !number.includes('.') ){
-            // if equal to zero, and there is a point
-            setNumber( stringNumber ); 
-            
-         } else if ( stringNumber !== '0' && stringNumber.includes('.') ) {
-            // Avoid 0.000
-            setNumber( number );
-         } else {
-            setNumber( number +  stringNumber );
-         }
-    }
-   };
-
-   const changePositiveToNegative = ()=>{
-    if ( number.includes('-') ){
-        setNumber( number.replace('-','') );
-
-    } else {
-        setNumber( '-' + number );
-    }
-   };
-
-    const btnDelete = ( numberString: string ) =>{
-
-        if ( numberString.length === 1  ) {
-            setNumber( '0' );
-        } else if ( numberString.length === 2 && numberString[0] === '-' ){
-            setNumber( '0' );
-        } else {
-            setNumber( numberString.slice(0,-1) );
-        }
-    
-    };
-
-    const prevNumberToDisplay = () =>{
-        if ( number.endsWith('.') ){
-            setPrevNumber( number.slice(0,-1) );
-            setNumber( '0' );
-        } else {
-            setPrevNumber( number );
-            setNumber( '0' );
-        }
-    };
-
-    const btnAdd = () =>{
-        prevNumberToDisplay();
-        mathematicalOperationsRef.current = MathematicalOperations.add;
-    };
-    const btnSubtract = () =>{
-        prevNumberToDisplay();
-        mathematicalOperationsRef.current = MathematicalOperations.add;
-
-
-    };    
-    const btnMultiply = () =>{
-        prevNumberToDisplay();
-        mathematicalOperationsRef.current = MathematicalOperations.add;
-    };
-    const btnDivide = () =>{
-        prevNumberToDisplay();
-        mathematicalOperationsRef.current = MathematicalOperations.add;
-    };
-    
+  const { 
+    btnAdd,
+    btnDelete,
+    btnDivide,
+    btnMultiply,
+    btnSubtract,
+    changePositiveToNegative,
+    clearScreen,makeNumber,number,prevNumber,toCalculate } = useCalculator();
   return (
     <View style={ styles.containerCalculator } >
-        <Text style={ styles.smallResult } >{ prevNumber }</Text>
+        {
+            ( prevNumber !== '0' ) && <Text style={ styles.smallResult } >{ prevNumber }</Text>
+        }
         <Text style={ styles.result } 
         numberOfLines={ 1 }
         adjustsFontSizeToFit
@@ -138,7 +58,7 @@ export const CalculatorScreen = () => {
         <View style={ styles.row } >
             <ButtonCalculator text='0' buttonWith action={ ()=>makeNumber('0')}/>
             <ButtonCalculator text='.' action={ ()=>makeNumber('.')}/>
-            <ButtonCalculator text='=' color='#ff8c00'/>
+            <ButtonCalculator text='=' color='#ff8c00'action={ toCalculate }/>
         </View>
        
     </View> 
