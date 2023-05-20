@@ -9,7 +9,7 @@ import { ButtonCalculator } from '../components/ButtonCalculator';
 export const CalculatorScreen = () => {
     
    const [ number, setNumber ] = useState('100');
-   const [ prevNumber, setPrevNumber ] = useState('0');
+   //const [ prevNumber, setPrevNumber ] = useState('0');
 
    const clearScreen = () =>{
     setNumber('0');
@@ -17,6 +17,15 @@ export const CalculatorScreen = () => {
 
    const makeNumber = ( stringNumber:string ) =>{
     setNumber( number + stringNumber );
+   };
+
+   const positiveNegative = ()=>{
+    if ( number.includes('-') ){
+        setNumber( number.replace('-','') );
+
+    } else {
+        setNumber( '-' + number );
+    }
    };
     
   return (
@@ -29,7 +38,7 @@ export const CalculatorScreen = () => {
 
         <View style={ styles.row } >
             <ButtonCalculator text='C'color='#9B9B9B' action={ clearScreen }/>
-            <ButtonCalculator text='+/-' color='#9B9B9B'/>
+            <ButtonCalculator text='+/-' color='#9B9B9B'action={ positiveNegative }/>
             <ButtonCalculator text='del' color='#9B9B9B'/>
             <ButtonCalculator text='/' color='#ff8c00'/>
         </View>
