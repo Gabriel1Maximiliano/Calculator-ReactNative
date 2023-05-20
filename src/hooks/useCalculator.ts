@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 
-enum MathematicalOperations {
+enum MathOps {
   add,
   subtract,
   multiply,
@@ -14,7 +14,7 @@ export const useCalculator = () => {
   const [number, setNumber] = useState('0');
   const [prevNumber, setPrevNumber] = useState('0');
 
-  const mathematicalOperationsRef = useRef<MathematicalOperations>();
+  const mathOpsRef = useRef<MathOps>();
 
   const clearScreen = () => {
     setIsPressed(false);
@@ -76,42 +76,42 @@ export const useCalculator = () => {
 
   const btnAdd = () => {
     prevNumberToDisplay();
-    mathematicalOperationsRef.current = MathematicalOperations.add;
+    mathOpsRef.current = MathOps.add;
   };
   const btnSubtract = () => {
     prevNumberToDisplay();
-    mathematicalOperationsRef.current = MathematicalOperations.subtract;
+    mathOpsRef.current = MathOps.subtract;
   };
 
   const btnMultiply = () => {
     prevNumberToDisplay();
-    mathematicalOperationsRef.current = MathematicalOperations.multiply;
+    mathOpsRef.current = MathOps.multiply;
   };
   const btnDivide = () => {
     prevNumberToDisplay();
-    mathematicalOperationsRef.current = MathematicalOperations.divide;
+    mathOpsRef.current = MathOps.divide;
   };
   const toCalculate = () => {
     let result;
     const firstNumber = Number(number);
     const secondNumber = Number(prevNumber);
-    switch (mathematicalOperationsRef.current) {
-      case MathematicalOperations.add:
+    switch (mathOpsRef.current) {
+      case MathOps.add:
         result = firstNumber + secondNumber;
         setNumber(`${result}`);
         setPrevNumber('0');
         break;
-      case MathematicalOperations.subtract:
+      case MathOps.subtract:
         result = secondNumber - firstNumber;
         setNumber(`${result}`);
         setPrevNumber('0');
         break;
-      case MathematicalOperations.multiply:
+      case MathOps.multiply:
         result = firstNumber * secondNumber;
         setNumber(`${result}`);
         setPrevNumber('0');
         break;
-      case MathematicalOperations.divide:
+      case MathOps.divide:
         if (firstNumber === 0) {
           console.log('entre al if de dividir');
           setNumber('Error, no se puede dividir entre cero');
